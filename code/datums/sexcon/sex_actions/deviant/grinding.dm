@@ -30,11 +30,15 @@
 		do_subtle = !prob(user.sexcon.force > SEX_FORCE_MID ? 5 : 2) // roll the dice, diceman
 	else
 		do_subtle = 0 // we go loud
-	if(user.zone_selected == BODY_ZONE_PRECISE_GROIN)
-		zone_text = user.dir == target.dir ? "ass" : "crotch"
-		pleasure_target = 1 // only pleasure them if user is grinding against their ass/crotch
-	else
-		zone_text = lowertext(parse_zone(user.zone_selected))
+	switch(user.zone_selected)
+		if(BODY_ZONE_PRECISE_GROIN)
+			zone_text = user.dir == target.dir ? "ass" : "crotch"
+			pleasure_target = 1
+		if(BODY_ZONE_CHEST)
+			zone_text = target.getorganslot(ORGAN_SLOT_BREASTS) ? "tits" : "chest"
+			pleasure_target = 1
+		else
+			zone_text = lowertext(parse_zone(user.zone_selected))
 	user.sexcon.show_progress = !do_subtle
 	user.visible_message(user.sexcon.spanify_force("[user] [do_subtle ? pick("subtly","sneakily","covertly","stealthily","quietly") : user.sexcon.get_generic_force_adjective()] grinds over [target]'s [zone_text]..."), vision_distance = (do_subtle ? 1 : DEFAULT_MESSAGE_RANGE))
 	if(!do_subtle)
