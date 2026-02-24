@@ -302,7 +302,7 @@
 	if(ishuman(btm) && !QDELETED(btm) && ishuman(top) && !QDELETED(top))
 		if(forceful_removal)
 			var/damage = top.sexcon.knotted_part_partner&SEX_PART_JAWS ? 10 : 30 // base damage value
-			if (top.sexcon.arousal > MAX_AROUSAL / 3) // considered still hard, let it rip like a beyblade
+			if (top.sexcon.arousal > MAX_AROUSAL / 4 || top.sexcon.manual_arousal > SEX_MANUAL_AROUSAL_PARTIAL) // considered still hard, let it rip like a beyblade
 				damage *= 2
 				btm.Knockdown(10)
 				if(notify && !keep_btm_status && !btm.has_status_effect(/datum/status_effect/knot_gaped)) // apply gaped status if extra forceful pull (only if we're not reknotting target)
@@ -471,7 +471,7 @@
 	if(!istype(L) || !L.sexcon)
 		return FALSE
 	if(L.sexcon.knotted_status == KNOTTED_AS_TOP)
-		var/do_forceful_removal = L.cmode || L.sexcon.arousal > MAX_AROUSAL / 3 // combat mode, or considered still hard, let it rip like a beyblade
+		var/do_forceful_removal = L.cmode || L.sexcon.arousal > MAX_AROUSAL / 4 || L.sexcon.manual_arousal > SEX_MANUAL_AROUSAL_PARTIAL // combat mode, or considered still hard, let it rip like a beyblade
 		L.sexcon.knot_remove(forceful_removal = do_forceful_removal)
 	return FALSE
 
