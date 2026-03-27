@@ -13,7 +13,7 @@
 	slot_adjust = list(
 		/datum/job/roguetown/manorguard = 4,//split with watchmen
 		/datum/job/roguetown/warden = 4,//split with vanguard
-		/datum/job/roguetown/squire = 3,//Rookie (and by extension vanguard) kinda fill this role somewhat.
+		/datum/job/roguetown/squire = 4,//Rookie (and by extension vanguard) kinda fill this role somewhat.
 	)
 	title_adjust = list(
 		/datum/job/roguetown/physician = list(display_title = "Court Physician"),
